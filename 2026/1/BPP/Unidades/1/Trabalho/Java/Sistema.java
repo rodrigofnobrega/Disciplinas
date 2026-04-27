@@ -6,6 +6,9 @@ class D {
     String c;
 }
 
+/**
+ * Enum que representa os níveis de confiabilidade de uma notícia.
+ */
 enum ClassificaoNoticiaEnum {
     CONFIAVEL,
     DUVIDOSA,
@@ -44,6 +47,21 @@ public class Sistema {
         }
     }
 
+    /**
+     * Calcula a pontuação (score) de falsidade de uma notícia com base em regras pré-determinadas.
+     * <p>
+     * A pontuação é incrementada em 1 para cada uma das seguintes condições atendidas:
+     * <ul>
+     * <li>O texto não contém a palavra "FONTE".</li>
+     * <li>O texto contém exclamações repetidas ("!!!").</li>
+     * <li>O texto contém a palavra "URGENTE".</li>
+     * <li>O texto possui menos de 10 caracteres.</li>
+     * </ul>
+     *
+     * @param noticia O texto da notícia a ser avaliado.
+     * @return O valor inteiro representando o score da notícia (quanto maior, menos confiável).
+     * @throws RuntimeException Se a string da notícia for nula, vazia ou contiver apenas espaços em branco.
+     */
     public static int calcularScoreNoticia(String noticia) {
         if (noticia == null || noticia.isBlank()) {
             throw new RuntimeException("Erro ao calcular score, a notícia não pode ser vazia/nula");
@@ -67,6 +85,13 @@ public class Sistema {
         return score;
     }
 
+    /**
+     * Converte a pontuação numérica de uma notícia em uma categoria do {@link ClassificaoNoticiaEnum}.
+     *
+     * @param score A pontuação calculada da notícia. Não pode ser um valor negativo.
+     * @return {@code CONFIAVEL} para score 0, {@code DUVIDOSA} para score 1, e {@code FALSA} para score 2 ou maior.
+     * @throws RuntimeException Se o score fornecido for negativo.
+     */
     public static ClassificaoNoticiaEnum classificarNoticia(int score) {
         if (score < 0) {
             throw new RuntimeException("O score não pode ser negativo");
@@ -81,6 +106,14 @@ public class Sistema {
         }
     }
 
+    /**
+     * Analisa o texto de uma notícia e retorna a sua classificação de confiabilidade em formato de texto.
+     * <p>
+     *
+     * @param noticia O texto da notícia a ser analisado.
+     * @return O nome da constante do enum (ex: "CONFIAVEL", "DUVIDOSA" ou "FALSA") em formato String.
+     * @throws RuntimeException Se a string da notícia for nula, vazia ou contiver apenas espaços em branco.
+     */
     public static String analisarNoticia(String noticia) {
         if (noticia == null || noticia.isBlank()) {
             throw new RuntimeException("Erro ao analisar noticia. A notícia não pode ser vazia/nula");

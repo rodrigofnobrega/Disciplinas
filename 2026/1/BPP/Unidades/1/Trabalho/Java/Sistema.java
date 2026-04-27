@@ -6,6 +6,12 @@ class D {
     String c;
 }
 
+enum ClassificaoNoticiaEnum {
+    CONFIAVEL,
+    DUVIDOSA,
+    FALSA
+}
+
 public class Sistema {
 
     static ArrayList<D> data = new ArrayList<>();
@@ -38,29 +44,51 @@ public class Sistema {
         }
     }
 
-    public static String analisar(String txt) {
+    public static int calcularScoreNoticia(String noticia) {
+        if (noticia == null || noticia.isBlank()) {
+            throw new RuntimeException("Erro ao calcular score, a notícia não pode ser vazia/nula");
+        }
+
         int score = 0;
 
-        if (!txt.contains("FONTE")) {
-            score = score + 1;
+        if (!noticia.contains("FONTE")) {
+            score++;
         }
-        if (txt.contains("!!!")) {
-            score = score + 1;
+        if (noticia.contains("!!!")) {
+            score++;
         }
-        if (txt.contains("URGENTE")) {
-            score = score + 1;
+        if (noticia.contains("URGENTE")) {
+            score++;
         }
-        if (txt.length() < 10) {
-            score = score + 1;
+        if (noticia.length() < 10) {
+            score++;
+        }
+
+        return score;
+    }
+
+    public static ClassificaoNoticiaEnum classificarNoticia(int score) {
+        if (score < 0) {
+            throw new RuntimeException("O score não pode ser negativo");
         }
 
         if (score == 0) {
-            return "confiavel";
+            return ClassificaoNoticiaEnum.CONFIAVEL;
         } else if (score == 1) {
-            return "duvidosa";
+            return  ClassificaoNoticiaEnum.DUVIDOSA;
         } else {
-            return "falsa";
+            return  ClassificaoNoticiaEnum.FALSA;
         }
+    }
+
+    public static String analisarNoticia(String noticia) {
+        if (noticia == null || noticia.isBlank()) {
+            throw new RuntimeException("Erro ao analisar noticia. A notícia não pode ser vazia/nula");
+        }
+
+        int scoreNoticia = calcularScoreNoticia(noticia);
+
+        return classificarNoticia(scoreNoticia).name();
     }
 
     public static void addManual(Scanner sc) {
@@ -81,7 +109,7 @@ public class Sistema {
         System.out.print("Digite o texto: ");
         String t = sc.nextLine();
 
-        String c = analisar(t);
+        String c = analisarNoticia(t);
         f(t, c);
     }
 

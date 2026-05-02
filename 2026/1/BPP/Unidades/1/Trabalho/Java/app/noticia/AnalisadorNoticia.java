@@ -1,6 +1,6 @@
 package app.noticia;
 
-import app.ConfiabilidadeNoticiaEnum;
+import app.noticia.enums.ClassificacaoNoticiaEnum;
 
 public class AnalisadorNoticia implements IAnalisadorNoticia {
     /**
@@ -60,23 +60,23 @@ public class AnalisadorNoticia implements IAnalisadorNoticia {
     }
 
     /**
-     * Converte a pontuação numérica de uma notícia em uma categoria do {@link ConfiabilidadeNoticiaEnum}.
+     * Converte a pontuação numérica de uma notícia em uma categoria do {@link ClassificacaoNoticiaEnum}.
      *
      * @param score A pontuação calculada da notícia. Não pode ser um valor negativo.
      * @return {@code CONFIAVEL} para score 0, {@code DUVIDOSA} para score 1, e {@code FALSA} para score 2 ou maior.
      * @throws RuntimeException Se o score fornecido for negativo.
      */
-    private ConfiabilidadeNoticiaEnum classificarNoticia(int score) {
+    private ClassificacaoNoticiaEnum classificarNoticia(int score) {
         if (score < 0) {
             throw new RuntimeException("O score não pode ser negativo");
         }
 
         if (score == 0) {
-            return ConfiabilidadeNoticiaEnum.CONFIAVEL;
+            return ClassificacaoNoticiaEnum.CONFIAVEL;
         } else if (score == 1) {
-            return  ConfiabilidadeNoticiaEnum.DUVIDOSA;
+            return  ClassificacaoNoticiaEnum.DUVIDOSA;
         } else {
-            return  ConfiabilidadeNoticiaEnum.FALSA;
+            return  ClassificacaoNoticiaEnum.FALSA;
         }
     }
 }

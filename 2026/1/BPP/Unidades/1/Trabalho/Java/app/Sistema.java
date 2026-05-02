@@ -11,7 +11,7 @@ public class Sistema {
     static ArrayList<Noticia> data = new ArrayList<>();
 
     // função que faz tudo
-    public static void f(String a, String b) {
+    public  void f(String a, String b) {
         // adiciona coisa
         if (a != null && !a.equals("")) {
             Noticia noticiaClassificada = new Noticia();
@@ -29,13 +29,13 @@ public class Sistema {
         }
     }
 
-    public static void listarNoticiasCadastradas() {
+    public  void listarNoticiasCadastradas() {
         for (Noticia noticia : data) {
             noticia.exibirNoticia();
         }
     }
 
-    public static void addManual(Scanner sc) {
+    public  void addManual(Scanner sc) {
         System.out.print("Digite o texto: ");
         String t = sc.nextLine();
 
@@ -49,7 +49,7 @@ public class Sistema {
         }
     }
 
-    public static void addAuto(Scanner sc) {
+    public  void addAuto(Scanner sc) {
         System.out.print("Digite o texto: ");
         String t = sc.nextLine();
 

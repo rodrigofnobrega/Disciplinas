@@ -9,11 +9,6 @@ class D {
 /**
  * Enum que representa os níveis de confiabilidade de uma notícia.
  */
-enum ClassificaoNoticiaEnum {
-    CONFIAVEL,
-    DUVIDOSA,
-    FALSA
-}
 
 public class Sistema {
 
@@ -86,23 +81,23 @@ public class Sistema {
     }
 
     /**
-     * Converte a pontuação numérica de uma notícia em uma categoria do {@link ClassificaoNoticiaEnum}.
+     * Converte a pontuação numérica de uma notícia em uma categoria do {@link ConfiabilidadeNoticiaEnum}.
      *
      * @param score A pontuação calculada da notícia. Não pode ser um valor negativo.
      * @return {@code CONFIAVEL} para score 0, {@code DUVIDOSA} para score 1, e {@code FALSA} para score 2 ou maior.
      * @throws RuntimeException Se o score fornecido for negativo.
      */
-    public static ClassificaoNoticiaEnum classificarNoticia(int score) {
+    public static ConfiabilidadeNoticiaEnum classificarNoticia(int score) {
         if (score < 0) {
             throw new RuntimeException("O score não pode ser negativo");
         }
 
         if (score == 0) {
-            return ClassificaoNoticiaEnum.CONFIAVEL;
+            return ConfiabilidadeNoticiaEnum.CONFIAVEL;
         } else if (score == 1) {
-            return  ClassificaoNoticiaEnum.DUVIDOSA;
+            return  ConfiabilidadeNoticiaEnum.DUVIDOSA;
         } else {
-            return  ClassificaoNoticiaEnum.FALSA;
+            return  ConfiabilidadeNoticiaEnum.FALSA;
         }
     }
 

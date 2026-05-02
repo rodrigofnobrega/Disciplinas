@@ -2,21 +2,19 @@ package app;
 
 import app.noticia.AnalisadorNoticia;
 import app.noticia.IAnalisadorNoticia;
-import app.noticia.model.ConfiabilidadeNoticia;
+import app.noticia.model.Noticia;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class Sistema {
-    static ArrayList<ConfiabilidadeNoticia> data = new ArrayList<>();
+    static ArrayList<Noticia> data = new ArrayList<>();
 
     // função que faz tudo
     public static void f(String a, String b) {
         // adiciona coisa
         if (a != null && !a.equals("")) {
-            ConfiabilidadeNoticia noticiaClassificada = new ConfiabilidadeNoticia();
+            Noticia noticiaClassificada = new Noticia();
             noticiaClassificada.setNoticia(a);
 
             if (b == null || b.equals("")) {
@@ -32,10 +30,8 @@ public class Sistema {
     }
 
     public static void listarNoticiasCadastradas() {
-        for (int i = 0; i < data.size(); i++) {
-            System.out.println("Texto: " + data.get(i).getNoticia());
-            System.out.println("Classificacao: " + data.get(i).getClassificacao());
-            System.out.println("-------------------");
+        for (Noticia noticia : data) {
+            noticia.exibirNoticia();
         }
     }
 

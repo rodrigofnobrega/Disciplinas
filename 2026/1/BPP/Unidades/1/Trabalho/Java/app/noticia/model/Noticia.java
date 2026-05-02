@@ -1,8 +1,15 @@
 package app.noticia.model;
 
-public class ConfiabilidadeNoticia {
+public class Noticia {
     private String noticia;
     private String classificacao;
+
+    public void exibirNoticia() {
+        System.out.println("-------------------");
+        System.out.println("Texto: " + getNoticia());
+        System.out.println("Classificacao: " + getClassificacao());
+        System.out.println("-------------------");
+    }
 
     public String getNoticia() {
         return this.noticia;

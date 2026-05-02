@@ -1,33 +1,29 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class D {
-    String t;
-    String c;
+class ConfiabilidadeNoticia {
+    String noticia;
+    String confiabilidade;
 }
-
-/**
- * Enum que representa os níveis de confiabilidade de uma notícia.
- */
 
 public class Sistema {
 
-    static ArrayList<D> data = new ArrayList<>();
+    static ArrayList<ConfiabilidadeNoticia> data = new ArrayList<>();
 
     // função que faz tudo
     public static void f(String a, String b) {
         // adiciona coisa
         if (a != null && !a.equals("")) {
-            D d = new D();
-            d.t = a;
+            ConfiabilidadeNoticia noticiaClassificada = new ConfiabilidadeNoticia();
+            noticiaClassificada.noticia = a;
 
             if (b == null || b.equals("")) {
-                d.c = "duvidosa";
+                noticiaClassificada.confiabilidade = "duvidosa";
             } else {
-                d.c = b;
+                noticiaClassificada.confiabilidade = b;
             }
 
-            data.add(d);
+            data.add(noticiaClassificada);
         } else {
             System.out.println("erro");
         }
@@ -36,8 +32,8 @@ public class Sistema {
     public static void func2() {
         // lista tudo
         for (int i = 0; i < data.size(); i++) {
-            System.out.println("Texto: " + data.get(i).t);
-            System.out.println("Classificacao: " + data.get(i).c);
+            System.out.println("Texto: " + data.get(i).noticia);
+            System.out.println("Classificacao: " + data.get(i).confiabilidade);
             System.out.println("-------------------");
         }
     }

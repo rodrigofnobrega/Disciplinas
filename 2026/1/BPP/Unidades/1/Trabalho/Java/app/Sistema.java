@@ -1,3 +1,5 @@
+package app;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +9,6 @@ class ConfiabilidadeNoticia {
 }
 
 public class Sistema {
-
     static ArrayList<ConfiabilidadeNoticia> data = new ArrayList<>();
 
     // função que faz tudo
@@ -29,8 +30,7 @@ public class Sistema {
         }
     }
 
-    public static void func2() {
-        // lista tudo
+    public static void listarNoticiasCadastradas() {
         for (int i = 0; i < data.size(); i++) {
             System.out.println("Texto: " + data.get(i).noticia);
             System.out.println("Classificacao: " + data.get(i).confiabilidade);
@@ -135,37 +135,5 @@ public class Sistema {
 
         String c = analisarNoticia(t);
         f(t, c);
-    }
-
-    public static void menu() {
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("1 - adicionar manual");
-            System.out.println("2 - adicionar automatico");
-            System.out.println("3 - listar");
-            System.out.println("4 - sair");
-
-            String op = sc.nextLine();
-
-            if (op.equals("1")) {
-                addManual(sc);
-            } else if (op.equals("2")) {
-                addAuto(sc);
-            } else if (op.equals("3")) {
-                func2();
-            } else if (op.equals("4")) {
-                break;
-            } else {
-                System.out.println("errado");
-            }
-        }
-
-        sc.close();
-    }
-
-    // inicia programa
-    public static void main(String[] args) {
-        menu();
     }
 }

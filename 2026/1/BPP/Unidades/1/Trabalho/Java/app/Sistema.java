@@ -1,61 +1,47 @@
 package app;
 
-import app.noticia.AnalisadorNoticia;
 import app.noticia.IAnalisadorNoticia;
 import app.noticia.model.Noticia;
-
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class Sistema {
-    static ArrayList<Noticia> data = new ArrayList<>();
+    // Lista para guardar as notícias (tirei o static para ficar correto)
+    private final List<Noticia> noticias = new ArrayList<>();
+    
+    // Aqui está a Injeção de Dependência: o Sistema "recebe" o analisador pronto
+    private final IAnalisadorNoticia analisador;
 
-    // função que faz tudo
-    public  void f(String a, String b) {
-        // adiciona coisa
-        if (a != null && !a.equals("")) {
-            Noticia noticiaClassificada = new Noticia();
-            noticiaClassificada.setNoticia(a);
+    // Construtor: avisamos que para o Sistema existir, ele precisa de um analisador
+    public Sistema(IAnalisadorNoticia analisador) {
+        this.analisador = analisador;
+    }
 
-            if (b == null || b.equals("")) {
-                noticiaClassificada.setClassificacao("duvidosa");
+    // A "função que faz tudo" agora se chama salvarNoticia
+    public void salvarNoticia(String texto, String classificacao) {
+        if (texto != null && !texto.isBlank()) {
+            Noticia novaNoticia = new Noticia();
+            novaNoticia.setNoticia(texto);
+
+            // Se não informarem a classificação, vira "duvidosa" por padrão
+            if (classificacao == null || classificacao.isBlank()) {
+                novaNoticia.setClassificacao("duvidosa");
             } else {
-                noticiaClassificada.setClassificacao(b);
+                novaNoticia.setClassificacao(classificacao);
             }
 
-            data.add(noticiaClassificada);
-        } else {
-            System.out.println("erro");
+            noticias.add(novaNoticia);
         }
     }
 
-    public  void listarNoticiasCadastradas() {
-        for (Noticia noticia : data) {
-            noticia.exibirNoticia();
+    public void listarNoticias() {
+        for (Noticia n : noticias) {
+            n.exibirNoticia();
         }
     }
 
-    public  void addManual(Scanner sc) {
-        System.out.print("Digite o texto: ");
-        String t = sc.nextLine();
-
-        System.out.print("Digite classificacao: ");
-        String c = sc.nextLine();
-
-        if (c.equals("")) {
-            f(t, null);
-        } else {
-            f(t, c);
-        }
-    }
-
-    public  void addAuto(Scanner sc) {
-        System.out.print("Digite o texto: ");
-        String t = sc.nextLine();
-
-        IAnalisadorNoticia analisadorNoticia = new AnalisadorNoticia();
-        String c = analisadorNoticia.analisarNoticia(t);
-
-        f(t, c);
+    // Agora o Sistema pede para o analisador fazer o trabalho dele
+    public String analisarTexto(String texto) {
+        return this.analisador.analisarNoticia(texto);
     }
 }

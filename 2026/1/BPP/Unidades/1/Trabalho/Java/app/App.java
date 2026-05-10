@@ -4,14 +4,18 @@ import app.menu.IMenuSistema;
 import app.menu.MenuSistema;
 import app.noticia.AnalisadorNoticia;
 import app.noticia.IAnalisadorNoticia;
+import app.sistema.ISistema;
+import app.sistema.Sistema;
+import app.utils.IScannerHelper;
+import app.utils.ScannerHelper;
 
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         IAnalisadorNoticia analisadorNoticia = new AnalisadorNoticia();
-        Sistema sistema = new Sistema(analisadorNoticia);
+        IScannerHelper scanner = new ScannerHelper(new Scanner(System.in));
+        ISistema sistema = new Sistema(analisadorNoticia, scanner);
 
         IMenuSistema menuSistema = new MenuSistema(sistema, scanner);
 

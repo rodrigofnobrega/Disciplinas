@@ -1,7 +1,8 @@
 package app.menu;
 
-import app.utils.ScannerHelper;
-import app.Sistema;
+import app.sistema.ISistema;
+import app.utils.IScannerHelper;
+import app.sistema.Sistema;
 
 import java.util.Scanner;
 
@@ -12,8 +13,8 @@ import java.util.Scanner;
  * para isolar a responsabilidade de interação com o usuário das lógicas de negócio.
  */
 public class MenuSistema implements IMenuSistema {
-    private final Sistema sistema;
-    private final Scanner scanner;
+    private final ISistema sistema;
+    private final IScannerHelper scanner;
 
     /**
      * Construtor da classe MenuSistema.
@@ -21,7 +22,7 @@ public class MenuSistema implements IMenuSistema {
      * @param sistema A instância da classe {@link Sistema} que contém as regras de negócio e dados das notícias.
      * @param scanner A instância de {@link Scanner} utilizada para ler as entradas do teclado.
      */
-    public MenuSistema(Sistema sistema, Scanner scanner) {
+    public MenuSistema(ISistema sistema, IScannerHelper scanner) {
         this.sistema = sistema;
         this.scanner = scanner;
     }
@@ -40,12 +41,10 @@ public class MenuSistema implements IMenuSistema {
         while (continuarExecutando) {
             exibirMenuInicial();
 
-            int opcao = ScannerHelper.lerEntradaInteiro("Informe a opção desejada: ", scanner);
+            int opcao = scanner.lerEntradaInteiro("Informe a opção desejada: ");
 
             continuarExecutando = processarOpcaoMenu(opcao);
         }
-
-        scanner.close();
     }
 
     /**
@@ -65,23 +64,29 @@ public class MenuSistema implements IMenuSistema {
      * @return {@code true} se o menu deve continuar sendo exibido, ou {@code false} caso a opção de sair (4) seja escolhida.
      */
     private boolean processarOpcaoMenu(int opcao) {
-        switch (opcao) {
-            case 1:
-                this.sistema.addManual(scanner);
-                return true;
-            case 2:
-                sistema.addAuto(scanner);
-                return true;
-            case 3:
-                sistema.listarNoticiasCadastradas();
-                return true;
-            case 4:
-                System.out.println("Saindo...");
-                scanner.close();
-                return false;
-            default:
-                System.out.println("A opção informada é inválida. Os valores válidos são de 1 a 4");
-                return true;
+        try {
+            switch (opcao) {
+                case 1:
+                    this.sistema.cadastrarNoticiaManual();
+                    return true;
+                case 2:
+                    sistema.cadastrarNoticiaAutomatica();
+                    return true;
+                case 3:
+                    sistema.listarNoticiasCadastradas();
+                    return true;
+                case 4:
+                    System.out.println("Saindo...");
+                    scanner.fecharScanner();
+                    return false;
+                default:
+                    System.out.println("A opção informada é inválida. Os valores válidos são de 1 a 4");
+                    return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("ERRO: " + ex.getMessage());
         }
+
+        return true;
     }
 }

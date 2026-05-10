@@ -4,6 +4,11 @@ public class Noticia {
     private String noticia;
     private String classificacao;
 
+    public Noticia(String noticia, String classificacao) {
+        this.noticia = noticia;
+        this.classificacao = classificacao;
+    }
+
     public void exibirNoticia() {
         System.out.println("-------------------");
         System.out.println("Texto: " + getNoticia());

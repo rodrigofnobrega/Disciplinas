@@ -1,5 +1,7 @@
 package app.noticia;
 
+import app.noticia.enums.ClassificacaoNoticiaEnum;
+
 public interface IAnalisadorNoticia {
-    public String analisarNoticia(String noticia);
+     ClassificacaoNoticiaEnum analisarNoticia(String noticia);
 }

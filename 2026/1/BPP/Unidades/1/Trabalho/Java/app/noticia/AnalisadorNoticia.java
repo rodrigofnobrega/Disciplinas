@@ -10,21 +10,21 @@ import app.noticia.enums.ClassificacaoNoticiaEnum;
  */
 public class AnalisadorNoticia implements IAnalisadorNoticia {
     /**
-     * Analisa o texto de uma notícia e retorna a sua classificação de confiabilidade em formato de texto.
+     * Analisa o texto de uma notícia e retorna a sua classificação de confiabilidade.
      * <p>
      *
      * @param noticia O texto da notícia a ser analisado.
-     * @return O nome da constante do enum (ex: "CONFIAVEL", "DUVIDOSA" ou "FALSA") em formato String.
+     * @return O objeto {@link ClassificacaoNoticiaEnum} correspondente ao nível de confiabilidade identificado.
      * @throws RuntimeException Se a string da notícia for nula, vazia ou contiver apenas espaços em branco.
      */
-    public String analisarNoticia(String noticia) {
+    public ClassificacaoNoticiaEnum analisarNoticia(String noticia) {
         if (noticia == null || noticia.isBlank()) {
             throw new RuntimeException("Erro ao analisar noticia. A notícia não pode ser vazia/nula");
         }
 
         int scoreNoticia = calcularScoreNoticia(noticia);
 
-        return classificarNoticia(scoreNoticia).name();
+        return classificarNoticia(scoreNoticia);
     }
 
     /**

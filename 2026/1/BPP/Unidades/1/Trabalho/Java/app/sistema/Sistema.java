@@ -95,9 +95,9 @@ public class Sistema implements ISistema {
      */
     public  void cadastrarNoticiaAutomatica() {
         String noticia = scanner.lerEntradaTexto("Informe a notícia: ");
-        String classificacao = analisadorNoticia.analisarNoticia(noticia);
+        ClassificacaoNoticiaEnum classificacao = analisadorNoticia.analisarNoticia(noticia);
 
-        salvarNoticia(noticia, classificacao);
+        salvarNoticia(noticia, classificacao.name());
         System.out.println("Notícia analisada e cadastrada como: " + classificacao);
     }
 }

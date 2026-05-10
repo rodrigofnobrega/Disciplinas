@@ -1,14 +1,32 @@
 package app.noticia.model;
 
+/**
+ * Classe que representa o modelo de entidade de uma Notícia no sistema.
+ * <p>
+ * Armazena o conteúdo textual da notícia e a sua respectiva classificação
+ * de confiabilidade.
+ */
 public class Noticia {
     private String noticia;
     private String classificacao;
 
+    /**
+     * Construtor para instanciar uma nova Notícia com os seus dados iniciais.
+     *
+     * @param noticia       O texto contendo o corpo da notícia.
+     * @param classificacao A classificação de confiabilidade atribuída à notícia.
+     */
     public Noticia(String noticia, String classificacao) {
         this.noticia = noticia;
         this.classificacao = classificacao;
     }
 
+    /**
+     * Exibe os detalhes da notícia formatados diretamente no console.
+     * <p>
+     * Imprime o texto e a classificação isolados por linhas de formatação
+     * para facilitar a leitura e organização visual na listagem do sistema.
+     */
     public void exibirNoticia() {
         System.out.println("-------------------");
         System.out.println("Texto: " + getNoticia());

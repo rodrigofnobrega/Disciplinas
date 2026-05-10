@@ -2,6 +2,12 @@ package app.noticia;
 
 import app.noticia.enums.ClassificacaoNoticiaEnum;
 
+/**
+ * Classe responsável por analisar e determinar o nível de confiabilidade de uma notícia.
+ * <p>
+ * Implementa a interface {@link IAnalisadorNoticia} e utiliza um sistema
+ * de pontuação (score) baseado na verificação de padrões dos textos.
+ */
 public class AnalisadorNoticia implements IAnalisadorNoticia {
     /**
      * Analisa o texto de uma notícia e retorna a sua classificação de confiabilidade em formato de texto.

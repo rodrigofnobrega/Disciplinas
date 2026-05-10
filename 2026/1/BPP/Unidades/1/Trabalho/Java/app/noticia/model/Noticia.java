@@ -1,10 +1,7 @@
 package app.noticia.model;
 
 /**
- * Classe que representa o modelo de entidade de uma Notícia no sistema.
- * <p>
- * Armazena o conteúdo textual da notícia e a sua respectiva classificação
- * de confiabilidade.
+ * Representa o modelo de entidade de uma Notícia no sistema.
  */
 public class Noticia {
     private String noticia;
@@ -23,9 +20,6 @@ public class Noticia {
 
     /**
      * Exibe os detalhes da notícia formatados diretamente no console.
-     * <p>
-     * Imprime o texto e a classificação isolados por linhas de formatação
-     * para facilitar a leitura e organização visual na listagem do sistema.
      */
     public void exibirNoticia() {
         System.out.println("-------------------");

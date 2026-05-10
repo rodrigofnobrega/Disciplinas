@@ -3,20 +3,10 @@ package app.noticia;
 import app.noticia.enums.ClassificacaoNoticiaEnum;
 
 /**
- * Classe responsável por analisar e determinar o nível de confiabilidade de uma notícia.
- * <p>
- * Implementa a interface {@link IAnalisadorNoticia} e utiliza um sistema
- * de pontuação (score) baseado na verificação de padrões dos textos.
+ * Implementa a interface {@link IAnalisadorNoticia}
  */
 public class AnalisadorNoticia implements IAnalisadorNoticia {
-    /**
-     * Analisa o texto de uma notícia e retorna a sua classificação de confiabilidade.
-     * <p>
-     *
-     * @param noticia O texto da notícia a ser analisado.
-     * @return O objeto {@link ClassificacaoNoticiaEnum} correspondente ao nível de confiabilidade identificado.
-     * @throws RuntimeException Se a string da notícia for nula, vazia ou contiver apenas espaços em branco.
-     */
+    @Override
     public ClassificacaoNoticiaEnum analisarNoticia(String noticia) {
         if (noticia == null || noticia.isBlank()) {
             throw new RuntimeException("Erro ao analisar noticia. A notícia não pode ser vazia/nula");
@@ -27,21 +17,6 @@ public class AnalisadorNoticia implements IAnalisadorNoticia {
         return classificarNoticia(scoreNoticia);
     }
 
-    /**
-     * Calcula a pontuação (score) de falsidade de uma notícia com base em regras pré-determinadas.
-     * <p>
-     * A pontuação é incrementada em 1 para cada uma das seguintes condições atendidas:
-     * <ul>
-     * <li>O texto não contém a palavra "FONTE".</li>
-     * <li>O texto contém exclamações repetidas ("!!!").</li>
-     * <li>O texto contém a palavra "URGENTE".</li>
-     * <li>O texto possui menos de 10 caracteres.</li>
-     * </ul>
-     *
-     * @param noticia O texto da notícia a ser avaliado.
-     * @return O valor inteiro representando o score da notícia (quanto maior, menos confiável).
-     * @throws RuntimeException Se a string da notícia for nula, vazia ou contiver apenas espaços em branco.
-     */
     private int calcularScoreNoticia(String noticia) {
         if (noticia == null || noticia.isBlank()) {
             throw new RuntimeException("Erro ao calcular score, a notícia não pode ser vazia/nula");
@@ -65,13 +40,6 @@ public class AnalisadorNoticia implements IAnalisadorNoticia {
         return score;
     }
 
-    /**
-     * Converte a pontuação numérica de uma notícia em uma categoria do {@link ClassificacaoNoticiaEnum}.
-     *
-     * @param score A pontuação calculada da notícia. Não pode ser um valor negativo.
-     * @return {@code CONFIAVEL} para score 0, {@code DUVIDOSA} para score 1, e {@code FALSA} para score 2 ou maior.
-     * @throws RuntimeException Se o score fornecido for negativo.
-     */
     private ClassificacaoNoticiaEnum classificarNoticia(int score) {
         if (score < 0) {
             throw new RuntimeException("O score não pode ser negativo");
